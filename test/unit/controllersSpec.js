@@ -2,30 +2,23 @@
 
 /* jasmine specs for controllers go here */
 
-describe('MyCtrl1', function(){
-  var myCtrl1;
+describe('Foo', function () {
+    var $scope;
 
-  beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
-});
-
-
-describe('MyCtrl2', function(){
-  var myCtrl2;
+    beforeEach(function () {
+        module('myApp');
+        inject(function (_$rootScope_, _$controller_) {
+           $scope =  _$rootScope_.$new();
+            _$controller_('Foo', {
+               $scope: $scope
+           });
+        });
+    });
 
 
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
+    it('should say "hello"', function () {
+        expect($scope.greets).toEqual('hi');
+        $scope.hello();
+        expect($scope.greets).toEqual('hello');
+    });
 });
